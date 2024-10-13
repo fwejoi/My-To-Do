@@ -24,14 +24,10 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, `body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
+    margin: 0;
+    padding: 20px;
 }
-
-h1 {
-    margin-top: 50px;
-}
-`, "",{"version":3,"sources":["webpack://./../../tongshiyu/My-To-Do/src/styles.css"],"names":[],"mappings":"AAAA;IACI,8BAA8B;IAC9B,yBAAyB;IACzB,WAAW;IACX,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;AACpB","sourcesContent":["body {\r\n    font-family: Arial, sans-serif;\r\n    background-color: #f4f4f4;\r\n    color: #333;\r\n    text-align: center;\r\n}\r\n\r\nh1 {\r\n    margin-top: 50px;\r\n}\r\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./../../tongshiyu/My-To-Do/src/styles.css"],"names":[],"mappings":"AAAA;IACI,8BAA8B;IAC9B,yBAAyB;IACzB,SAAS;IACT,aAAa;AACjB","sourcesContent":["body {\r\n    font-family: Arial, sans-serif;\r\n    background-color: #f4f4f4;\r\n    margin: 0;\r\n    padding: 20px;\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -474,6 +470,147 @@ function styleTagTransform(css, styleElement) {
 }
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "../../tongshiyu/My-To-Do/src/app.js":
+/*!*******************************************!*\
+  !*** ../../tongshiyu/My-To-Do/src/app.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   renderApp: () => (/* binding */ renderApp)
+/* harmony export */ });
+/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom */ "../../tongshiyu/My-To-Do/src/dom.js");
+/* harmony import */ var _notes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./notes */ "../../tongshiyu/My-To-Do/src/notes.js");
+
+
+
+//管理应用主要逻辑和应用
+const renderApp = () => {
+  const appContainer = document.getElementById("app");
+  appContainer.innerHTML = ""; // 清空容器
+  _dom__WEBPACK_IMPORTED_MODULE_0__["default"].renderTodoList(appContainer);
+  (0,_notes__WEBPACK_IMPORTED_MODULE_1__.renderNotes)(appContainer);
+};
+
+
+/***/ }),
+
+/***/ "../../tongshiyu/My-To-Do/src/dom.js":
+/*!*******************************************!*\
+  !*** ../../tongshiyu/My-To-Do/src/dom.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./task */ "../../tongshiyu/My-To-Do/src/task.js");
+
+
+const dom = (() => {
+  function renderTodoList(container) {
+    const todoList = document.createElement("div");
+    todoList.innerHTML = `
+        <h2>待办事项</h2>
+        <input type="text" placeholder="添加新事项" id="new-todo" />
+        <button id="add-todo">添加</button>
+        <ul id="todo-items"></ul>
+    `;
+    container.appendChild(todoList);
+    document.getElementById("add-todo").addEventListener("click", _task__WEBPACK_IMPORTED_MODULE_0__["default"].addTodo);
+  }
+
+  return{
+    renderTodoList
+  }
+})();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dom);
+
+
+/***/ }),
+
+/***/ "../../tongshiyu/My-To-Do/src/notes.js":
+/*!*********************************************!*\
+  !*** ../../tongshiyu/My-To-Do/src/notes.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   renderNotes: () => (/* binding */ renderNotes)
+/* harmony export */ });
+const renderNotes = (container) => {
+  const notesSection = document.createElement("div");
+  notesSection.innerHTML = `
+        <h2>笔记</h2>
+        <textarea id="note-input" placeholder="添加新笔记"></textarea>
+        <button id="add-note">添加</button>
+        <div id="notes-display"></div>
+    `;
+  container.appendChild(notesSection);
+
+  document.getElementById("add-note").addEventListener("click", addNote);
+};
+
+//增加笔记
+const addNote = () => {
+  const input = document.getElementById("note-input");
+  const noteText = input.value;
+  if (noteText) {
+    const notesDisplay = document.getElementById("notes-display");
+    const noteItem = document.createElement("div");
+    noteItem.textContent = noteText;
+    notesDisplay.appendChild(noteItem);
+    input.value = ""; // 清空输入框
+  }
+};
+
+
+/***/ }),
+
+/***/ "../../tongshiyu/My-To-Do/src/task.js":
+/*!********************************************!*\
+  !*** ../../tongshiyu/My-To-Do/src/task.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const tasks = (() => {
+  class Task {
+    constructor(description) {
+      this.description = description;
+      this.completed = completed;
+    }
+  }
+
+  function addTask(desdescription) {
+    const input = document.getElementById("note-input");
+    const noteText = input.value;
+    if (noteText) {
+      const notesDisplay = document.getElementById("notes-display");
+      const noteItem = document.createElement("div");
+      noteItem.textContent = noteText;
+      notesDisplay.appendChild(noteItem);
+      input.value = ""; // 清空输入框
+    }
+  }
+
+  return{
+    addTask
+  }
+})();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Task);
+
+
 /***/ })
 
 /******/ 	});
@@ -556,11 +693,12 @@ var __webpack_exports__ = {};
   !*** ../../tongshiyu/My-To-Do/src/index.js ***!
   \*********************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ "../../tongshiyu/My-To-Do/src/styles.css");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "../../tongshiyu/My-To-Do/src/app.js");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ "../../tongshiyu/My-To-Do/src/styles.css");
 
 
-const app = document.getElementById("app");
-app.innerHTML = "<h1>Hello, Webpack!</h1>";
+
+document.addEventListener("DOMContentLoaded", _app__WEBPACK_IMPORTED_MODULE_0__.renderApp);
 
 })();
 

@@ -1,10 +1,413 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
 }
 
-h1 {
-    margin-top: 50px;
+#app {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#header {
+  background-color: #ffd8d4;
+  height: 10vh;
+  border-bottom: 2px solid #f28585;
+}
+
+#footer {
+  background-color: rgb(255, 248, 247);
+  height: 5vh;
+}
+
+#container {
+  flex: 1;
+  display: flex;
+}
+
+#leftPanel {
+  flex: 0.6;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+}
+
+#home {
+  padding: 4px 10px 0px 10px;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#home h2 {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+#home h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #202021; /* 下划线颜色 */
+}
+
+/* 每个菜单项的通用样式 */
+.menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* 每个菜单项占用相等的空间 */
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 5px; /* 菜单项之间的间距 */
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s, color 0.3s;
+  color: #333; /* 默认文字颜色 */
+  background-color: #ffe3e1;
+  margin-bottom: 2px;
+}
+
+.menu-item:hover {
+  background-color: #ffb4ad;
+}
+
+.menu-item.active {
+  background-color: #ff9187;
+}
+
+#projects {
+  flex: 1;
+  padding: 0px 10px;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#projects h2 {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+#projects h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #202021; /* 下划线颜色 */
+}
+
+.project-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 5px; /* 菜单项之间的间距 */
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s, color 0.3s;
+  color: #333; /* 默认文字颜色 */
+  background-color: #ffe3e1;
+  margin-bottom: 2px;
+}
+
+.project-item:hover {
+  background-color: #ffb4ad;
+}
+
+.project-item.active {
+  background-color: #ff9187;
+}
+
+#rightPanel {
+  flex: 2;
+  background-color: #f5f5f5;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+#homeorProjectTitle {
+  height: 90px;
+  background-color: #ff9187;
+  color: #f4f4f4;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+#addTask {
+  margin-top: 10px;
+  height: 40px;
+  background-color: #ffeeec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#addTask span {
+  font-size: 1.2rem;
+}
+
+#addTask:hover {
+  background-color: #ffd9d6;
+}
+
+#AddTaskCard {
+  padding: 10px 8px;
+  background-color: #ffffff;
+  height: 310px;
+  transform: translateY(20px);
+  animation: fadeInDown 0.5s forwards;
+}
+
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#taskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#taskForm input[type="text"],
+#taskForm input[type="date"],
+#taskForm textarea {
+  width: 100%-10px;
+  padding: 5px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+#taskForm input[type="text"]:focus,
+#taskForm input[type="date"]:focus,
+#taskForm textarea:focus {
+  border-color: #ffb1a9; /* 聚焦时的边框颜色 */
+  outline: none;
+}
+
+#taskForm textarea {
+  resize: vertical; /* 允许用户调整文本区域的大小 */
+}
+
+/* 按钮容器样式（可选） */
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* 按钮之间的间距 */
+  margin-top: 4px;
+}
+
+/* 通用按钮样式 */
+.buttons button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 取消按钮样式 */
+.Cancel {
+  background-color: #e74c3c; /* 鲜艳的红色 */
+}
+
+.Cancel:hover {
+  background-color: #c0392b; /* 深红色 */
+}
+
+.Cancel:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 提交按钮样式 */
+.submit {
+  background-color: #2ecc71; /* 亮绿色 */
+}
+
+.submit:hover {
+  background-color: #27ae60; /* 深绿色 */
+}
+
+.submit:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.important-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 5px;
+  background-color: #d3d5d7; /* 未选中时的背景色 */
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* 为绝对定位的伪元素提供参考 */
+  height: 30px;
+  width: 200px;
+}
+
+.important-toggle input[type="checkbox"] {
+  opacity: 0; /* 透明度为0 */
+  position: absolute; /* 绝对定位 */
+  width: 100%;
+  height: 100%;
+  cursor: pointer; /* 确保点击区域覆盖整个按钮 */
+}
+
+/* Span 用于显示文本和图标 */
+.important-toggle span {
+  pointer-events: none; /* 防止点击事件穿透到文本 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: color 0.3s ease;
+}
+
+/* 选中状态的样式 */
+.important-toggle input[type="checkbox"]:checked + span {
+  background-color: #e74c3c; /* 选中时的背景色 */
+  color: #fff; /* 文字颜色 */
+}
+
+/* 添加图标或其他视觉效果 */
+.important-toggle input[type="checkbox"]:checked + span::before {
+  content: "✔ ";
+  margin-right: 5px;
+}
+
+#addProjectDiv {
+  margin-top: 10px;
+  height: 30px;
+  background-color: #ffeeec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#addProjectDiv span {
+  font-size: 1rem;
+}
+
+#addProjectDiv:hover {
+  background-color: #ffd9d6;
+}
+
+#projectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* 按钮容器样式（可选） */
+#projectForm.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* 按钮之间的间距 */
+  margin-top: 2px;
+}
+
+/* 通用按钮样式 */
+#projectForm.buttons button {
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.projectCancel {
+  background-color: #e74c3c; /* 鲜艳的红色 */
+}
+
+.projectCancel:hover {
+  background-color: #c0392b; /* 深红色 */
+}
+
+.projectCancel:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.projectsubmit {
+  background-color: #2ecc71; /* 亮绿色 */
+}
+
+.projectsubmit:hover {
+  background-color: #27ae60; /* 深绿色 */
+}
+
+.projectsubmit:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#projectForm input[type="text"] {
+  margin-top: 3px;
+  width: 100%-5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  height: 20px;
+}
+
+#projectForm input[type="text"]:focus,
+#projectForm input[type="date"]:focus,
+#projectForm textarea:focus {
+  border-color: #ffb1a9; /* 聚焦时的边框颜色 */
+  outline: none;
+}
+
+#taskDiv {
+  height: 40px;
+  background-color: #fea8a0;
+  color: #f4f4f4;
+  font-size: 2rem;
+  border-radius: 2px;
 }
