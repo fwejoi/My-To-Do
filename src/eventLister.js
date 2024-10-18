@@ -32,7 +32,7 @@ const eventListener = (() => {
     });
   }
 
-  // 为项目项添加点击事件监听器
+  // 为项目添加点击事件监听器
   function addProjectItemClickListener(projectItem) {
     projectItem.addEventListener("click", () => {
       setActiveItem(projectItem);

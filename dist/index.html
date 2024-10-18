@@ -1,12 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Project</title>
-<script defer src="main.js"></script></head>
-<body>
-    <div id="app"></div>
-    <script src="efd7c6d39be21ff4f3eb.js"></script>
-</body>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="84bb4fc080631c2605f1.css" />
+  <script defer src="main.js"></script></head>
+  <body>
+    <div id="app">
+      <div id="header">What<span style="color: #f28585;;">ToDo</span></div>
+      <div id="container">
+        <div id="leftPanel">
+          <div id="home">
+            <h2>Home</h2>
+            <div id="allTask" class="menu-item active">AllTask</div>
+            <div id="today" class="menu-item">Today</div>
+            <div id="thisWeek" class="menu-item">ThisWeek</div>
+            <div id="important" class="menu-item">Important</div>
+          </div>
+          <div id="projects">
+            <h2>Project</h2>
+            <div id="project" class="project-item" data-index="0">
+              <p class="project-title">Default</p>
+              <div class="project-icons">
+                <svg
+                  class="rename-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 20h9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M16.5 3.5L21 8l-9.5 9.5H7v-4.5L16.5 3.5z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                </svg>
+                <svg
+                  class="delete-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 6h18M19 6l-1.334 12.006A2 2 0 0 1 15.675 20H8.325a2 2 0 0 1-1.991-1.994L5 6m3-3h8a1 1 0 0 1 1 1v2H7V4a1 1 0 0 1 1-1z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="rightPanel">
+          <div id="homeorProjectTitle">Title</div>
+          <div id="tasksDiv"></div>
+        </div>
+      </div>
+      <div id="footer">Copyright © 2024 fwejoi
+        <img src="1c95b85d86a7c25b6f3c.png"/>
+      </div>
+    </div>
+
+    <!-- 编辑任务的模态窗口 -->
+    <div id="editTaskModal" class="modal">
+      <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <h2>Edit Task</h2>
+        <form id="editTaskForm">
+          <label for="editTitle">Title<span class="required">*</span></label>
+          <input type="text" id="editTitle" name="title" required />
+
+          <label for="editDetails">Details</label>
+          <textarea
+            id="editDetails"
+            name="details"
+            rows="4"
+            placeholder="optional"
+          ></textarea>
+
+          <label for="editDate">Date</label>
+          <input type="date" id="editDate" name="date" />
+
+          <label class="important-toggle" for="editImportant">
+            <input type="checkbox" id="editImportant" name="important" />
+            <span>Important</span>
+          </label>
+
+          <div class="editButtons">
+            <button type="button" class="cancelBtn">Cancel</button>
+            <button type="submit" class="submitBtn">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 展示细节的模态窗口 -->
+    <div id="detailsModal" class="modal">
+      <div class="detilesModalContent">
+        <span class="closeBtn">&times;</span>
+        <div id="detailcontent">
+          <h1 id="detailTitle"></h1>
+          <p>
+            <strong>Details:</strong>
+            <span id="detailDetails">This is a sample task description.</span>
+          </p>
+          <p><strong>Date:</strong> <span id="detailDate">2024-04-27</span></p>
+          <p>
+            <strong>Important:</strong> <span id="detailImportant">⭐</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="optionsBox" class="options-box" style="display: none">
+      <button id="renameBtn">Rename</button>
+      <button id="deleteBtn">Delete</button>
+    </div>
+
+    <!-- 引入JavaScript文件 -->
+    <script type="module" src="bfb4c47f0109b69f8848.js"></script>
+  </body>
 </html>

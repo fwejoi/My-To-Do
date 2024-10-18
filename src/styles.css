@@ -19,12 +19,36 @@ body {
   background-color: #ffd8d4;
   height: 10vh;
   border-bottom: 2px solid #f28585;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lilita One", sans-serif;
+  font-size: 3rem;
 }
 
 #footer {
-  background-color: rgb(255, 248, 247);
-  height: 5vh;
+    display: flex; /* 使用 flexbox 布局 */
+    justify-content: center; /* 项目之间均匀分布 */
+    align-items: center; /* 垂直居中对齐 */
+    background-color: #ffd8d4;
+    padding: 10px 20px; /* 内边距 */
+    border-top: 1px solid #ccc; /* 顶部边框 */
 }
+
+#footer img {
+    width: 30px; /* 设置图像宽度 */
+    height: auto; /* 高度自适应 */
+    margin-left: 5px; /* 左侧边距 */
+    background-color: #ffd8d4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
+}
+
+#footer img:hover {
+    transform: scale(1.1); /* 悬停时放大图像 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+}
+
+
 
 #container {
   flex: 1;
@@ -111,11 +135,11 @@ body {
 
 .project-item {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 10px;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 20px;
   margin: 0 5px; /* 菜单项之间的间距 */
   border-radius: 6px;
   cursor: pointer;
@@ -132,6 +156,16 @@ body {
 
 .project-item.active {
   background-color: #ff9187;
+}
+
+.project-menu-icon {
+  fill: #333; /* 设置图标颜色 */
+  cursor: pointer; /* 鼠标悬停时变成指针 */
+  transition: fill 0.3s; /* 添加过渡效果 */
+}
+
+.project-menu-icon:hover {
+  fill: #f5dcd6; /* 鼠标悬停时改变颜色 */
 }
 
 #rightPanel {
@@ -215,7 +249,7 @@ body {
 }
 
 /* 按钮容器样式（可选） */
-.buttons {
+#taskForm.buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,7 +258,7 @@ body {
 }
 
 /* 通用按钮样式 */
-.buttons button {
+#taskForm.buttons button {
   padding: 8px 16px;
   border-radius: 5px;
   border: none;
@@ -404,10 +438,381 @@ body {
   outline: none;
 }
 
-#taskDiv {
-  height: 40px;
-  background-color: #fea8a0;
-  color: #f4f4f4;
-  font-size: 2rem;
-  border-radius: 2px;
+#tasksDiv {
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.taskDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ff9f9f;
+  border-radius: 5px;
+  background-color: #ffe3e3;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.taskDiv:hover {
+  background-color: #ffc0c0;
+}
+
+.leftTaskDiv {
+  display: flex;
+  align-items: center;
+}
+
+.rightTaskDiv {
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 5px;
+}
+
+/* 日期样式 */
+.taskDate {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 5px;
+  width: 100px;
+}
+
+/* 按钮样式 */
+.completeBtn,
+.editBtn,
+.deleteBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.completeBtn,
+.editBtn,
+.deleteBtn:active {
+  transform: scale(0.95);
+}
+
+/* 编辑和删除按钮样式 */
+.editBtn,
+.deleteBtn {
+  font-size: 1.2em;
+  color: #555;
+  padding: 5px;
+}
+
+.editBtn:hover,
+.deleteBtn:hover {
+  color: #000;
+}
+
+/* 完成按钮样式 */
+.completeBtn {
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+
+/* 详情样式 */
+.rightTaskDiv p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.details {
+  font-size: 1rem;
+  border: 1px solid rgb(255, 155, 150);
+  color: #ffffff;
+  background-color: rgb(255, 155, 150); /* 添加背景色 */
+  padding: 5px 10px; /* 增加一些内边距 */
+  border-radius: 5px; /* 圆角边框 */
+  cursor: pointer; /* 鼠标变成手型 */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* 平滑的过渡效果 */
+}
+
+/* 鼠标悬停效果 */
+.details:hover {
+  background-color: rgb(255, 100, 95); /* 改变背景色 */
+  border-color: rgb(255, 100, 95); /* 改变边框色 */
+  color: #ffffff; /* 保持字体颜色 */
+}
+
+/* 鼠标按下激活效果 */
+.details:active {
+  transform: scale(0.95); /* 点击时缩小按钮 */
+  background-color: rgb(220, 90, 85); /* 进一步改变背景色 */
+  border-color: rgb(220, 90, 85); /* 进一步改变边框色 */
+}
+
+#taskTitle {
+  color: #ff7272;
+}
+
+.completedTitle {
+  text-decoration: line-through !important;
+  z-index: 1;
+}
+
+/* 模态窗口整体样式 */
+.modal {
+  display: none; /* 默认隐藏 */
+  position: fixed;
+  z-index: 1000; /* 确保模态窗口在最前面 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* 允许滚动 */
+  background-color: rgba(0, 0, 0, 0.5); /* 黑色背景，透明度为0.5 */
+  transition: opacity 0.3s ease;
+}
+
+/* 显示模态窗口时的样式 */
+.modal.show {
+  display: block;
+  opacity: 1;
+}
+
+/* 模态窗口内容样式 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 垂直居中 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 宽度可根据需要调整 */
+  max-width: 500px; /* 最大宽度 */
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 0.5s forwards;
+}
+
+/* 关闭按钮样式 */
+.modal-content .closeBtn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content .closeBtn:hover,
+.modal-content .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+}
+
+/* 表单按钮容器样式 */
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#editTaskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* 通用按钮样式 */
+.buttons button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 取消按钮样式 */
+.editButtons .cancelBtn {
+  background-color: #e74c3c; /* 鲜艳的红色 */
+  color: #fff;
+}
+
+.editButtons .cancelBtn:hover {
+  background-color: #c0392b; /* 深红色 */
+}
+
+.editButtons .cancelBtn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 提交按钮样式 */
+.editButtons .submitBtn {
+  background-color: #2ecc71; /* 亮绿色 */
+  color: #fff;
+}
+
+.editButtons .submitBtn:hover {
+  background-color: #27ae60; /* 深绿色 */
+}
+
+.editButtons .submitBtn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 添加动画效果 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Required field indicator */
+.required {
+  color: red;
+}
+
+.detilesModalContent {
+  background-color: #fefefe;
+  margin: 10% auto; /* 垂直居中 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* 宽度可根据需要调整 */
+  max-width: 500px; /* 最大宽度 */
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 0.5s forwards;
+  border: 2px solid rgb(255, 156, 156);
+}
+
+/* 关闭按钮样式 */
+.detilesModalContent .closeBtn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.detilesModalContent .closeBtn:hover,
+.detilesModalContent .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+}
+
+#optionsBox {
+  display: none; /* 初始隐藏 */
+  position: absolute;
+  background-color: #ffffff; /* 背景颜色 */
+  border-radius: 8px; /* 圆角 */
+  border: 1px solid #ddd; /* 边框 */
+  padding: 15px; /* 内边距 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+  z-index: 1000; /* 确保在其他元素上方 */
+  transition: opacity 0.3s ease; /* 过渡效果 */
+}
+
+#optionsBox button {
+  display: block; /* 每个按钮占一行 */
+  width: 100%; /* 按钮宽度 */
+  padding: 10px; /* 内边距 */
+  margin: 5px 0; /* 按钮之间的间距 */
+  border: none; /* 无边框 */
+  border-radius: 5px; /* 圆角 */
+  background-color: #ff8478; /* 按钮颜色 */
+  color: white; /* 按钮文字颜色 */
+  font-size: 1rem; /* 字体大小 */
+  cursor: pointer; /* 鼠标指针效果 */
+  transition: background-color 0.3s ease; /* 悬停效果过渡 */
+}
+
+#optionsBox button:hover {
+  background-color: #ff7654; /* 悬停时改变颜色 */
+}
+
+#projectRenameBox {
+  z-index: 2;
+  position: absolute; /* 基于父元素进行定位 */
+  top: 100%; /* 顶部位置设置为 100%，表示紧跟在父元素底部 */
+  left: 0; /* 左对齐 */
+  background-color: white; /* 背景颜色 */
+  padding: 10px; /* 内边距 */
+  border: 1px solid #ccc; /* 边框 */
+  border-radius: 4px; /* 圆角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+  width: 100%; /* 宽度与父元素一致 */
+  box-sizing: border-box; /* 确保内边距不会影响宽度 */
+}
+
+#projectRenameBox input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#projectRenameBox button {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 80%;
+  gap: 20px;
+}
+
+#projectRenameBox .buttons {
+  display: flex;
+}
+
+#proSubmitRename {
+  background-color: #4caf50;
+  color: white;
+}
+
+#proCancelRename {
+  background-color: #f44336;
+  color: white;
+  margin-top: 10px;
+}
+
+#projectRenameBox button:hover {
+  opacity: 0.8;
+}
+
+.project-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.project-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.project-icons svg {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.project-icons svg:hover {
+  opacity: 0.7;
 }
