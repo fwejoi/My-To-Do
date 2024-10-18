@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # 当推送到主分支时触发工作流
+      - master  # 当推送到主分支时触发工作流
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # 确保使用 Node.js 版本 16
+          node-version: '20'  # 确保使用 Node.js 版本 16
 
       - name: Install dependencies
         run: npm install  # 安装依赖
